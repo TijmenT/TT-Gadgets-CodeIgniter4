@@ -13,6 +13,7 @@ $routes->get('/logout', 'Users::logout');
 $routes->post('/login', 'Users::index');
 $routes->get('/register', 'Users::register');
 $routes->post('/register', 'Users::register');
+$routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/products', 'Product::index');
 $routes->get('/cart', 'CartController::index');
 $routes->get('/add-to-cart/(:num)', 'CartController::addToCart/$1');

@@ -5,7 +5,7 @@
 //$products = GetProducts($mysqli);
 //session_start();
 ?>
-
+<script src="/assets/js/cards.js"></script>
 
       <div class="slideshow">
         <div id="image1" class="fade">
@@ -22,7 +22,7 @@
         <?php
      foreach ($products as $product) {
       ?>
-      <div class="product--card">
+      <div class="product--card1">
         <img class="product--img" src="assets/img/<?php echo $product['image']?>" />
         <h1 class="product--header"><?php echo $product['name']?></h1>
         <p1 class="product--price">€<?php echo number_format($product['price'], 2, ',', '.'); ?></p1>

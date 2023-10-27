@@ -10,7 +10,6 @@ class CartController extends Controller
 
     public function index()
     {
-        log_message('error', 'Added to cart');
         $data = [];
         $productModel = new ProductModel();
         $data['products'] = $productModel->findAll();
@@ -47,7 +46,6 @@ class CartController extends Controller
         if (isset($cart)) {
             $cart = $session->get('cart');
             $updatedCart = array();
-
             foreach ($cart as $item) {
                 if ($item == $productID && $newAmount > 0) {
                     $updatedCart[] = $productID;
@@ -56,15 +54,12 @@ class CartController extends Controller
                     $updatedCart[] = $item;
                 }
             }
-
             while ($newAmount > 0) {
                 $updatedCart[] = $productID;
                 $newAmount--;
             }
-
             $session->set('cart', $updatedCart);
         }
-
         echo "Aangepast!";
     }
 

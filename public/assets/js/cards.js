@@ -1,6 +1,6 @@
 function toggleCardsVisibility() {
     const container = document.querySelector('.product--products');
-    const cards = document.querySelectorAll('.product--card');
+    const cards = document.querySelectorAll('.product--card1');
     const cardMargin = 0.25;
     const cardWidth = cards[0].offsetWidth; 
     const containerWidth = container.offsetWidth;

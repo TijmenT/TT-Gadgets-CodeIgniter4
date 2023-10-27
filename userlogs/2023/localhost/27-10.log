@@ -1,0 +1,21 @@
+[2023-10-27 08:51:00] | UserAccount_ID: 1 | UserID: NULL | Action: / | 
+[2023-10-27 08:51:26] | UserAccount_ID: 1 | UserID: NULL | Action: /products | 
+[2023-10-27 08:51:28] | UserAccount_ID: 1 | UserID: NULL | Action: /add-to-cart/15 | 
+[2023-10-27 08:51:29] | UserAccount_ID: 1 | UserID: NULL | Action: /add-to-cart/14 | 
+[2023-10-27 09:30:25] | UserAccount_ID: 1 | UserID: NULL | Action: / | 
+[2023-10-27 09:30:27] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-10-27 09:30:30] | UserAccount_ID: 1 | UserID: NULL | Action: /login | email: 123@123.123 | password: ******** | 
+[2023-10-27 09:30:36] | UserAccount_ID: 1 | UserID: NULL | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-10-27 09:30:37] | UserAccount_ID: 1 | UserID: 14 | Action: / | 
+[2023-10-27 09:30:46] | UserAccount_ID: 1 | UserID: 14 | Action: /add-to-cart/7 | 
+[2023-10-27 09:30:47] | UserAccount_ID: 1 | UserID: 14 | Action: /cart | 
+[2023-10-27 09:30:49] | UserAccount_ID: 1 | UserID: 14 | Action: /checkout-order/false | 
+[2023-10-27 09:30:49] | UserAccount_ID: 1 | UserID: 14 | Action: /payment/67/310 | 
+[2023-10-27 09:30:50] | UserAccount_ID: 1 | UserID: 14 | Action: /order-paid/67 | 
+[2023-10-27 09:30:53] | UserAccount_ID: 1 | UserID: 14 | Action: /order | 
+[2023-10-27 09:30:56] | UserAccount_ID: 1 | UserID: 14 | Action: /cart | 
+[2023-10-27 09:30:56] | UserAccount_ID: 1 | UserID: 14 | Action: /cart | 
+[2023-10-27 09:30:57] | UserAccount_ID: 1 | UserID: 14 | Action: /ordered | 
+[2023-10-27 09:31:03] | UserAccount_ID: 1 | UserID: 14 | Action: /payment/51/1600.00 | 
+[2023-10-27 09:31:04] | UserAccount_ID: 1 | UserID: 14 | Action: /order-paid/51 | 
+[2023-10-27 09:31:07] | UserAccount_ID: 1 | UserID: 14 | Action: /order | 

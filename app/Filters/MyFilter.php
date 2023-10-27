@@ -10,6 +10,7 @@ class MyFilter implements FilterInterface
 
     public function before(RequestInterface $request, $arguments = null)
     {
+
         $request = service('request');
         $uri = $request->uri->getPath();
         $host = $request->uri->getHost();
