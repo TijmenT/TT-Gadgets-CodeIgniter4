@@ -20,6 +20,11 @@ foreach($orderhistory as $order){
         <p class="ordered--prijs" style="color: #4aba25" >Betaald</p>
         <?php
         }
+        elseif($order['paid'] == 2){
+          ?>
+        <p class="ordered--prijs" style="color: #eb4034" >Geannuleerd</p>
+        <?php
+      }
         else{
         ?>
        <p class="ordered--prijs" style="color: #eb4034">Onbetaald</p>
@@ -28,14 +33,14 @@ foreach($orderhistory as $order){
         <p class="ordered--prijs">€<?php echo number_format($order['amount'], 2, ',', '.'); ?></p>
         
         <?php
-        if($order['paid'] == 1){
+        if($order['paid'] == 0){
         ?>
-        <a href="orderinfo/<?php echo $order['order_ID'] ?>" class="ordered--meerinfo">Meer Info</a>
+        <a href="payment/<?php echo $order['order_ID']?>/<?php echo $order['amount']?>" class="ordered--meerinfo">Afrekenen</a>
         <?php
         }
         else{
         ?>
-        <a href="payment/<?php echo $order['order_ID']?>/<?php echo $order['amount']?>" class="ordered--meerinfo">Afrekenen</a>
+        <a href="orderinfo/<?php echo $order['order_ID'] ?>" class="ordered--meerinfo">Meer Info</a>
 
         <?php }
         ?>

@@ -42,7 +42,8 @@ $routes->get('/disable-user/(:num)', "AdminController::DisableUser/$1");
 $routes->get('/enable-user/(:num)', "AdminController::EnableUser/$1");
 $routes->post('/renew-password', "Users::RenewPassword");
 $routes->post('/edit-user-data', "Users::EditData");
-
+$routes->get('/mark-paid/(:num)', "AdminController::MarkPaid/$1");
+$routes->get('/cancel-order/(:num)', "AdminController::CancelOrder/$1");
 
 
 

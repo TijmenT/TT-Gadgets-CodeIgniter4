@@ -119,3 +119,49 @@ function EnableUser(customer_ID){
         }
     });
 }
+
+function MarkAsPaid(order_ID){
+    $.ajax({
+        url: '/mark-paid/' + order_ID,
+        type: 'GET',
+        success: function (result) {
+            console.log(result)
+            if(result == "success"){
+                window.location.reload();
+                }
+            else
+            {
+                console.log(result);
+                var popup = document.getElementById("cart-popup");
+                popup.textContent = " Kon niet markeren als betaald.";
+                popup.style.display = "block";
+                setTimeout(function () {
+                    popup.style.display = "none";
+                }, 2000);
+            }
+        }
+    });
+}
+
+function CancelOrder(order_ID){
+    $.ajax({
+        url: '/cancel-order/' + order_ID,
+        type: 'GET',
+        success: function (result) {
+            console.log(result)
+            if(result == "success"){
+                window.location.reload();
+                }
+            else
+            {
+                console.log(result);
+                var popup = document.getElementById("cart-popup");
+                popup.textContent = " Kon niet annuleren.";
+                popup.style.display = "block";
+                setTimeout(function () {
+                    popup.style.display = "none";
+                }, 2000);
+            }
+        }
+    });
+}

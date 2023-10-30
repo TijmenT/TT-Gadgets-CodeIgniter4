@@ -17,6 +17,9 @@ foreach ($orders as $order) {
     if($order['paid'] == 1){
         $status = 'Betaald';
     }
+    elseif($order['paid'] == 2){
+        $status = 'Geannuleerd';
+    }
     else
     {
         $status = 'Onbetaald';

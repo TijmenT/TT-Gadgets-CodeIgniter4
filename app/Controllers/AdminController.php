@@ -137,6 +137,28 @@ class AdminController extends BaseController
             echo "success";
         }
     }
+
+    public function MarkPaid($order_ID)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `orders` SET `paid` = 1 WHERE order_ID = ?", [$order_ID]);
+        if ($query) {
+            echo "success";
+        }
+    }
+    public function CancelOrder($order_ID)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `orders` SET `paid` = 2 WHERE order_ID = ?", [$order_ID]);
+        if ($query) {
+            echo "success";
+        }
+    }
+
     public function EnableUser($customer_ID)
     {
         if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
