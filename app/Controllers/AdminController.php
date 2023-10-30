@@ -49,6 +49,10 @@ class AdminController extends BaseController
 
     public function GetInfoFromOrderID($order_ID)
     {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+         if (session()->has('admin_id')) {}else{ Header("location: /admin-login"); }
+
         $db = \Config\Database::connect();
         $query = $db->query("SELECT * FROM products INNER JOIN ordered_items ON products.product_ID=ordered_items.product_ID WHERE ordered_items.order_ID = ?", [$order_ID]);
             if ($query) {
@@ -72,10 +76,34 @@ class AdminController extends BaseController
         echo view('templates/admin-header');
         echo view('admin-orderinfo', $data);
         echo view('templates/footer');
+    }  
+    
+    public function GetInfoFromUserID($user)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        
+        $query2 = $db->query('SELECT * FROM customers WHERE customer_ID = ? OR email = ?', [$user, $user]);
+        if ($query2) {
+            $userinfo = $query2->GetresultArray();
+        } else {
+            echo "Error: " . $db->error();
+        }
+        $db->close();
+
+        $data = [];
+        $data['user'] = $userinfo[0];
+        
+        echo view('templates/admin-header');
+        echo view('admin-userinfo', $data);
+        echo view('templates/footer');
     }   
 
     public function CheckOrder($orderid)
     {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
 
         $db = \Config\Database::connect();
 
@@ -88,12 +116,65 @@ class AdminController extends BaseController
         }
     }
 
+    public function ResetPassword($customer_ID)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `customers` SET `password` = '123456789' WHERE customer_ID = ?", [$customer_ID]);
+        if ($query) {
+            echo "success";
+        }
+    }
+
+    public function DisableUser($customer_ID)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `customers` SET `active` = 1 WHERE customer_ID = ?", [$customer_ID]);
+        if ($query) {
+            echo "success";
+        }
+    }
+    public function EnableUser($customer_ID)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `customers` SET `active` = 0 WHERE customer_ID = ?", [$customer_ID]);
+        if ($query) {
+            echo "success";
+        }
+    }
+
+    public function CheckUser($user)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+
+        $db = \Config\Database::connect();
+
+        $query = $db->query('SELECT * FROM customers WHERE customer_ID = ? OR email = ?', [$user, $user]);
+
+        if ($query->getNumRows() > 0) {
+            $userinfo = $query->GetresultArray();
+            $customerid = $userinfo[0]['customer_ID'];
+            echo $customerid;
+        } else {
+            echo "Invalid user";
+        }
+    }
+
     public function dashboard(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
         echo view('templates/admin-header');
         echo view('admin-dashboard'); 
     }
 
     public function users(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
         $data = [];
 
         $userModel = new UserModel();
@@ -102,6 +183,8 @@ class AdminController extends BaseController
         echo view('admin-users', $data); 
     }
     public function orders(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
         $orderModel = new OrderModel();
         $data['orders'] = $orderModel->findAll();
         echo view('templates/admin-header');

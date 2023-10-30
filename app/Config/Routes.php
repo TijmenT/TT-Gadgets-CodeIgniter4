@@ -26,6 +26,8 @@ $routes->get('/order-paid/(:num)', 'OrderController::PaidOrder/$1');
 $routes->get('/order', 'OrderController::OrderConfirmed');
 $routes->get('/ordered', "OrderController::GetMyOrders");
 $routes->get('/orderinfo/(:num)', "OrderController::GetProductsFromOrderID/$1");
+
+$routes->get('/admin', 'AdminController::dashboard');
 $routes->get('/admin-dashboard', 'AdminController::dashboard');
 $routes->get('/admin-login', 'AdminController::index');
 $routes->post('/admin-login', 'AdminController::index');
@@ -33,3 +35,14 @@ $routes->get('/admin-users', 'AdminController::users');
 $routes->get('/admin-orders', 'AdminController::orders');
 $routes->get('/admin-order-info/(:num)', "AdminController::GetInfoFromOrderID/$1");
 $routes->get('/does-order-exist/(:num)', 'AdminController::CheckOrder/$1');
+$routes->get('/does-user-exist/(:any)', 'AdminController::CheckUser/$1');
+$routes->get('/admin-user-info/(:any)', "AdminController::GetInfoFromUserID/$1");
+$routes->get('/reset-password/(:num)', "AdminController::ResetPassword/$1");
+$routes->get('/disable-user/(:num)', "AdminController::DisableUser/$1");
+$routes->get('/enable-user/(:num)', "AdminController::EnableUser/$1");
+$routes->post('/renew-password', "Users::RenewPassword");
+$routes->post('/edit-user-data', "Users::EditData");
+
+
+
+

@@ -3,6 +3,8 @@
 use CodeIgniter\Model;
 
 class UserModel extends Model{
+
+    protected $primaryKey = 'customer_id';
     protected $table = 'customers';
     protected $allowedFields = ['email', 'password', 'firstname', 'lastname', 'street', 'zipcode', 'city'];
     protected $beforeInsert = ['beforeInsert'];
