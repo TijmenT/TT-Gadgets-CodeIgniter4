@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +19,7 @@
 </head>
 <body>
 <nav class="nav--container">
-    <h1 class="nav--bigtext">TT Gadgets</h1>
+    <h1 class="nav--bigtext">TT G<a style="color:black;text-decoration:none;cursor:text;" href="/">a</a>dgets | Admin</h1>
     <?php if  (session()->has('admin_id')) { ?>
     <div class="nav--list">
         <a href="/admin-dashboard" class="nav--item">Dashboard</a>
@@ -25,7 +27,18 @@
         <a href="/admin-orders" class="nav--item">Bestellingen</a>
         <a href="/admin-products" class="nav--item">Producten</a>
         <a href="/admin-coupons" class="nav--item">Kortingscodes</a>
-
+        <?php 
+        if($userlevel > 0){
+          ?>
+          <a href="/admin-admins" class="nav--item">Admins</a>
+          <?php
+        }
+        if($userlevel > 1){
+            ?>
+          <a href="/admin-settings" class="nav--item">Instellingen</a>
+            <?php
+        }
+        ?>
     </div>
     <div class="nav--list2">
             <a href="/logout" class="nav--item">Uitloggen</a>

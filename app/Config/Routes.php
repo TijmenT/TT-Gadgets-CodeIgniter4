@@ -36,6 +36,8 @@ $routes->get('/admin-users', 'AdminController::users');
 $routes->get('/admin-orders', 'AdminController::orders');
 $routes->get('/admin-products', 'AdminController::products');
 $routes->get('/admin-coupons', 'AdminController::coupons');
+$routes->get('/admin-admins', 'AdminController::admins');
+$routes->get('/admin-settings', 'AdminController::settings');
 $routes->get('/admin-order-info/(:num)', "AdminController::GetInfoFromOrderID/$1");
 $routes->get('/does-order-exist/(:num)', 'AdminController::CheckOrder/$1');
 $routes->get('/does-user-exist/(:any)', 'AdminController::CheckUser/$1');

@@ -133,10 +133,10 @@ if ($totalToday == 0) {
 <canvas id="productChart"></canvas>
 </div>
 <div id="stats-grid-item" class="counts--container">
-<div class="count--item" ><img class="count--img" width="150px" src="/assets/img/countprofile.png"/><h1 class="count--label">Gebruikers</h1><br><h1 class="count--amount" ><?php echo $usersamount;?></h1></div>
-<div class="count--item" ><img class="count--img" width="150px" src="/assets/img/products.png"/><h1 class="count--label">Producten</h1><br><h1 class="count--amount" ><?php echo $productsamount;?></h1></div>
-<div class="count--item" ><img class="count--img" width="150px" src="/assets/img/order.png"/><h1 class="count--label">Orders</h1><br><h1 class="count--amount" ><?php echo $ordersamount;?></h1></div>
-<div class="count--item" ><img class="count--img" width="150px" src="/assets/img/coupon.png"/><h1 class="count--label">Coupons</h1><br><h1 class="count--amount" ><?php echo $couponsamount;?></h1></div>
+<a href="/admin-users" style="text-decoration: none; color: black" class="count--item" ><img class="count--img" width="150px" src="/assets/img/countprofile.png"/><h1 class="count--label">Gebruikers</h1><br><h1 class="count--amount" ><?php echo $usersamount;?></h1></a>
+<a href="/admin-products" style="text-decoration: none; color: black" class="count--item" ><img class="count--img" width="150px" src="/assets/img/products.png"/><h1 class="count--label">Producten</h1><br><h1 class="count--amount" ><?php echo $productsamount;?></h1></a>
+<a href="/admin-orders" style="text-decoration: none; color: black" class="count--item" ><img class="count--img" width="150px" src="/assets/img/order.png"/><h1 class="count--label">Orders</h1><br><h1 class="count--amount" ><?php echo $ordersamount;?></h1></a>
+<a href="/admin-coupons" style="text-decoration: none; color: black" class="count--item" ><img class="count--img" width="150px" src="/assets/img/coupon.png"/><h1 class="count--label">Coupons</h1><br><h1 class="count--amount" ><?php echo $couponsamount;?></h1></a>
 </div>
 </div>
 

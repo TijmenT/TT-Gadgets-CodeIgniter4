@@ -19,7 +19,7 @@
 </head>
 <body>
 <nav class="nav--container">
-    <h1 class="nav--bigtext">TT Gadgets</h1>
+    <h1 class="nav--bigtext">TT G<a style="color:black;text-decoration:none;cursor:text;" href="/admin">a</a>dgets</h1>
     <div class="nav--list">
         <a href="/" class="nav--item">Home</a>
         <a href="/products" class="nav--item">Assortiment</a>

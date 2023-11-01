@@ -45,7 +45,8 @@ class AdminController extends BaseController
             }
         }
 
-        echo view('templates/admin-header', $data);
+
+        echo view('templates/admin-header');
         echo view('admin-login', $data); 
     }
 
@@ -75,7 +76,11 @@ class AdminController extends BaseController
         $data['order'] = $orderinfo[0];
         $data['orderproducts'] = $products;
         
-        echo view('templates/admin-header');
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
         echo view('admin-orderinfo', $data);
         echo view('templates/footer');
     }  
@@ -97,7 +102,11 @@ class AdminController extends BaseController
         $data = [];
         $data['user'] = $userinfo[0];
         
-        echo view('templates/admin-header');
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
         echo view('admin-userinfo', $data);
         echo view('templates/footer');
     }   
@@ -389,7 +398,11 @@ class AdminController extends BaseController
         }
 
 
-        echo view('templates/admin-header');
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
         echo view('admin-dashboard', $data);
 
     }
@@ -401,7 +414,11 @@ class AdminController extends BaseController
 
         $userModel = new UserModel();
         $data['users'] = $userModel->findAll();
-        echo view('templates/admin-header');
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
         echo view('admin-users', $data); 
     }
     public function orders(){
@@ -409,7 +426,11 @@ class AdminController extends BaseController
 
         $orderModel = new OrderModel();
         $data['orders'] = $orderModel->findAll();
-        echo view('templates/admin-header');
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
         echo view('admin-orders', $data); 
     }
 
@@ -418,17 +439,59 @@ class AdminController extends BaseController
 
         $productModel = new ProductModel();
         $data['products'] = $productModel->findAll();
-        echo view('templates/admin-header');
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
         echo view('admin-products', $data); 
     }
 
     public function coupons(){
         if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
 
-        echo view('templates/admin-header');
+
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
         echo view('admin-coupons'); 
     }
 
+    public function admins(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        if($user['level'] > 0){
+        echo view('templates/admin-header', $data);
+        echo view('admin-admins');
+        }else{
+            return redirect()->to('/admin');
+        }
+
+    }
+
+    public function settings(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        if($user['level'] > 1){
+        echo view('templates/admin-header', $data);
+        echo view('admin-settings');
+        }else{
+            return redirect()->to('/admin');
+        }
+
+    }
 
     
 
