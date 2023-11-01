@@ -114,6 +114,66 @@ html {
 }
 
 
+.stats--container{
+    background-color: rgb(237, 237, 237);
+    margin: 10rem;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+#stats-grid-item{
+    padding: 1rem;
+}
+#revenue--header{
+    margin-top: 4rem;
+    margin-left: 4rem;
+    font-size: 5rem;
+}
+#revenue--difference{
+    margin-left: 4rem;
+    font-size: 2rem;
+}
+.sales--container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.topproducts--container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.counts--container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.count--item{
+    margin: 5rem;
+    border-radius: 1rem;
+    max-width: 30rem;
+    padding: 4rem;
+    background-color: rgb(218, 218, 218);
+}
+.timespan--picker{
+    margin: 1rem;
+    font-size: 2rem;
+}
+.count--label{
+    font-size: 2rem;
+    text-align: center;
+}
+.count--amount{
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem;
+    font-weight:bolder;
+}
+
+.count--img{
+    padding: 2rem;
+}
 .background--container {
     opacity: 90%;
     position: relative;

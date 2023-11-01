@@ -49,8 +49,9 @@ class OrderController extends BaseController
             $totalPriceDiscounted = $this->LoadCoupon($totalPrice);
         }
         $datee = date("Y-m-d");
+        $timee = date("H:i");
         $db = \Config\Database::connect();
-        $query = $db->query('INSERT INTO `orders`(`customer_ID`, `amount`, `date`, `fastshipping`) VALUES (?, ?, ?, ?)', [$customer_ID, $totalPriceDiscounted, $datee, $fastshipping]);
+        $query = $db->query('INSERT INTO `orders`(`customer_ID`, `amount`, `date`, `time`, `fastshipping`) VALUES (?, ?, ?, ?, ?)', [$customer_ID, $totalPriceDiscounted, $datee, $timee, $fastshipping]);
         if ($query) {
             $order_ID = $db->insertID();
             $ordereditems = $session->get('cart');

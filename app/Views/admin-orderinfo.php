@@ -72,29 +72,34 @@ $status;
   }
   ?>
 </div>
-
-
-
-<section class="product--products2">
-    <?php
+<div class="admin-orders">
+<div  style="background: transparent; margin: 0;" class="admin-order--item">
+<p class="cart--productnaam">ID</p>
+                        <p class="cart--productnaam">Naam</p>
+                        <p class="cart--productnaam">Aantal</p>
+                        <p class="cart--productnaam">Beschrijving</p>
+  </div>
+<?php
     $orderQuantities = array_count_values(array_column($orderproducts, 'product_ID')); 
+   
     if(empty($orderQuantities)){
         echo '<h1 class="cart--noitems">Empty.</h1>';
     } else {
-        foreach ($orderQuantities as $productid => $quantity) {
-            $product = findProductByID($productid, $orderproducts);
+      foreach ($orderQuantities as $productid => $quantity) {
+        $product = findProductByID($productid, $orderproducts);
+?>
+<div  style="text-decoration: none; color: black" class="admin-order--item">
+<p class="cart--productnaam"><?php echo $product['product_ID']?></p>
 
-    ?>
-            <div class="product--card1">
-                <img class="product--img" src="/assets/img/<?php echo $product['image']?>" />
-                <h1 class="product--header"><?php echo $product['name']?></h1>
-                <p1 class="product--price">Amount: <?php echo $quantity?></p1>
-                <br>
-                <br>
-                <center><p1 style="font-size: 1.3rem;"><?php echo $product['description']?></p1></center>
-            </div>
+                        <p class="cart--productnaam"><?php echo $product['name']?></p>
+                        <p class="cart--productnaam">Amount: <?php echo $quantity?></p>
+                        <p class="cart--productnaam"><?php echo $product['description']?></p>
+                        </div>
+
     <?php
         }
     }
     ?>
-</section>
+
+</div>
+
