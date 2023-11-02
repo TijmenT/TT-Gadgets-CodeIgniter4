@@ -20,6 +20,14 @@ class Home extends BaseController
         echo view('home', $data);
         echo view('templates/footer');
     }
+
+    public function offline()
+    {
+
+        echo view('templates/header');
+        echo view('offline');
+        echo view('templates/footer');
+    }
     public function about()
     {
 

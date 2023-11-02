@@ -11,6 +11,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/about', 'Home::about');
 $routes->get('/contact', 'Home::contact');
+$routes->get('/offline', 'Home::offline');
 $routes->get('/login', 'Users::index');
 $routes->get('/logout', 'Users::logout');
 $routes->post('/login', 'Users::index');
@@ -45,7 +46,6 @@ $routes->get('/admin-orders', 'AdminController::orders');
 $routes->get('/admin-products', 'AdminController::products');
 $routes->get('/admin-coupons', 'AdminController::coupons');
 $routes->get('/admin-admins', 'AdminController::admins');
-$routes->get('/admin-settings', 'AdminController::settings');
 
 //Login
 $routes->get('/admin-login', 'AdminController::index');
@@ -59,6 +59,9 @@ $routes->get('/admin-product-info/(:any)', "AdminController::GetInfoFromProductI
 $routes->get('/admin-coupon-info/(:any)', "AdminController::GetInfoFromCouponID/$1");
 
 //Api / Ajax
+$routes->get('/admin-disablewebshop', 'AdminController::DisableWebshop');
+$routes->get('/admin-enablewebshop', 'AdminController::EnableWebshop');
+
 $routes->get('/does-order-exist/(:num)', 'AdminController::CheckOrder/$1');
 $routes->get('/does-user-exist/(:any)', 'AdminController::CheckUser/$1');
 $routes->get('/does-product-exist/(:any)', 'AdminController::CheckProduct/$1');

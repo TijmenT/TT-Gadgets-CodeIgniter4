@@ -51,6 +51,23 @@ class AdminController extends BaseController
         echo view('admin-login', $data); 
     }
 
+    public function DisableWebshop(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `settings` SET `active` = 0 WHERE type = 'disable_site'");
+        return redirect()->to('/admin-dashboard');
+
+    }
+    public function EnableWebshop(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `settings` SET `active` = 1 WHERE type = 'disable_site'");
+        return redirect()->to('/admin-dashboard');
+
+    }
+
     public function GetInfoFromOrderID($order_ID)
     {
         if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
@@ -661,23 +678,6 @@ class AdminController extends BaseController
 
 
 
-
-    public function settings(){
-        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
-
-
-        $model = new AdminModel();
-        $admin_ID = $_SESSION['admin_id'];
-        $user = $model->where('admin_id', $admin_ID)->first();
-        $data['userlevel'] = $user['level'];
-        if($user['level'] > 1){
-        echo view('templates/admin-header', $data);
-        echo view('admin-settings');
-        }else{
-            return redirect()->to('/admin');
-        }
-
-    }
 
     
 

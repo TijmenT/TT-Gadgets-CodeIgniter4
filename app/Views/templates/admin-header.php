@@ -1,4 +1,11 @@
-
+<?php
+$db = \Config\Database::connect();
+$query = $db->query("SELECT `active`FROM settings WHERE type = 'disable_site'");
+$siteoff = false;
+if($query->getResultArray()[0]['active'] == 0){
+        $siteoff = true;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,10 +41,17 @@
           <?php
         }
         if($userlevel > 1){
+          if($siteoff == true){
             ?>
-          <a href="/admin-settings" class="nav--item">Instellingen</a>
+          <a href="/admin-enablewebshop" class="nav--item">Webshop Inschakelen</a>
             <?php
-        }
+        }else{
+          ?>
+                    <a href="/admin-disablewebshop" class="nav--item">Webshop Uitschakelen</a>
+
+          <?php
+
+        }}
         ?>
     </div>
     <div class="nav--list2">

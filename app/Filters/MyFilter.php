@@ -10,15 +10,34 @@ class MyFilter implements FilterInterface
 
     public function before(RequestInterface $request, $arguments = null)
     {
-
+        $session = \Config\Services::session();
         $request = service('request');
         $uri = $request->uri->getPath();
         $host = $request->uri->getHost();
-        $session = \Config\Services::session();
-    $session->set("useraccount_id", 1);
+        $session->set("useraccount_id", 1);
+        $uri = str_replace("///", "/", $uri);
+        $uri = str_replace("//", "/", $uri);
 
-    $uri = str_replace("///", "/", $uri);
-    $uri = str_replace("//", "/", $uri);
+        $db = \Config\Database::connect();
+
+        $query = $db->query("SELECT `active`FROM settings WHERE type = 'disable_site'");
+            if($query->getResultArray()[0]['active'] == 0){
+                if(!isset($_SESSION['admin_id'])){
+                    if($uri != "/offline"){
+                        return redirect()->to('/offline');
+
+                }
+                }
+        }else{
+            if($uri == "/offline"){
+                return redirect()->to('/');
+
+        }
+        }
+
+        
+
+    
 
     $logdirectory = "../userlogs/".date('Y')."/".$host;
     if(!is_dir($logdirectory)){
