@@ -7,6 +7,7 @@ use App\Models\AdminModel;
 use App\Models\OrderModel;
 use App\Models\UserModel;
 use App\Models\ProductModel;
+use App\Models\CouponModel;
 
 class AdminController extends BaseController
 {
@@ -109,7 +110,115 @@ class AdminController extends BaseController
         echo view('templates/admin-header', $data);
         echo view('admin-userinfo', $data);
         echo view('templates/footer');
+    }
+
+    public function EditAdmin(){
+ 
+        $model = new AdminModel();
+        $newData = [
+            'admin_id' => $this->request->getVar('admin_ID'),
+            'email' => $this->request->getVar('email'),
+            'username' => $this->request->getVar('username'),
+            'level' => $this->request->getVar('level')
+        ];
+
+        $model->update($newData['admin_id'], $newData);
+        return redirect()->to('admin-admins-info/'. $newData['admin_id']);
+        
+    }
+
+    public function GetInfoFromAdminID($user)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        
+        $query2 = $db->query('SELECT * FROM admins WHERE admin_ID = ?', [$user]);
+        if ($query2) {
+            $userinfo = $query2->GetresultArray();
+        } else {
+            echo "Error: " . $db->error();
+        }
+        $db->close();
+
+        $data = [];
+        $data['user'] = $userinfo[0];
+        
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        if($user['level'] > 0){
+        echo view('templates/admin-header', $data);
+        echo view('admin-admininfo', $data);
+        echo view('templates/footer');
+        }
+    }
+    public function GetInfoFromCouponID($coupon)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        
+        $query2 = $db->query('SELECT * FROM coupons WHERE coupon_ID = ?', [$coupon]);
+        if ($query2) {
+            $couponinfo = $query2->GetresultArray();
+        } else {
+            echo "Error: " . $db->error();
+        }
+        $db->close();
+
+        $data = [];
+        $data['coupon'] = $couponinfo[0];
+        
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
+        echo view('admin-couponinfo', $data);
+        echo view('templates/footer');
+    }
+    
+
+    public function GetInfoFromProductID($product)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        
+        $query2 = $db->query('SELECT * FROM products WHERE product_ID = ?', [$product]);
+        if ($query2) {
+            $productinfo = $query2->GetresultArray();
+        } else {
+            echo "Error: " . $db->error();
+        }
+        $query3 = $db->query('SELECT cat.name 
+                     FROM categories AS cat
+                     INNER JOIN products AS prod ON cat.catergorie_ID = prod.categorie_ID
+                     WHERE prod.product_ID = ?', [$product]);
+
+        if ($query3) {
+            $catergorie = $query3->GetresultArray();
+        } else {
+            echo "Error: " . $db->error();
+        }
+        $db->close();
+
+        $data = [];
+        $data['catergorie'] = $catergorie[0]['name'];
+        $data['product'] = $productinfo[0];
+        
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
+        echo view('admin-productinfo', $data);
+        echo view('templates/footer');
     }   
+
+    
 
     public function CheckOrder($orderid)
     {
@@ -124,6 +233,21 @@ class AdminController extends BaseController
             echo 'yes';
         } else {
             echo "Invalid order";
+        }
+    }
+    public function CheckCoupon($couponid)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+
+        $db = \Config\Database::connect();
+
+        $query = $db->query('SELECT * FROM coupons WHERE coupon_ID = ?', [$couponid]);
+
+        if ($query->getNumRows() > 0) {
+            echo 'yes';
+        } else {
+            echo "Invalid coupon";
         }
     }
 
@@ -181,6 +305,7 @@ class AdminController extends BaseController
         }
     }
 
+    
     public function CheckUser($user)
     {
         if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
@@ -198,6 +323,68 @@ class AdminController extends BaseController
             echo "Invalid user";
         }
     }
+
+    public function DisableCoupon($coupon_id)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `coupons` SET `active` = 0 WHERE coupon_ID = ?", [$coupon_id]);
+        if ($query) {
+            echo "success";
+        }
+    }
+    public function EnableCoupon($coupon_id)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `coupons` SET `active` = 1 WHERE coupon_ID = ?", [$coupon_id]);
+        if ($query) {
+            echo "success";
+        }
+    }
+
+
+    public function DisableProduct($product_id)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `products` SET `on_hold` = 1 WHERE product_ID = ?", [$product_id]);
+        if ($query) {
+            echo "success";
+        }
+    }
+
+    public function EnableProduct($product_id)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $db = \Config\Database::connect();
+        $query = $db->query("UPDATE `products` SET `on_hold` = 0 WHERE product_ID = ?", [$product_id]);
+        if ($query) {
+            echo "success";
+        }
+    }
+    public function CheckProduct($product)
+    {
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+
+        $db = \Config\Database::connect();
+
+        $query = $db->query('SELECT * FROM products WHERE product_ID = ?', [$product]);
+
+        if ($query->getNumRows() > 0) {
+            $productinfo = $query->GetresultArray();
+            $productid = $productinfo[0]['product_ID'];
+            echo $productid;
+        } else {
+            echo "Invalid product";
+        }
+    }
+    
 
     public function dashboard($timespan = null){
     
@@ -267,14 +454,12 @@ class AdminController extends BaseController
             }
             $data['todayproducts'] = $productsLast30Days;
 
-            // Use OrderModel to get orders for the last 30 days
             $orderModel = new OrderModel();
             $today = date('Y-m-d');
             $data['orders_one'] = $orderModel->where('date >=', $last30Days)
                                                     ->where('date <=', $today)
                                                     ->findAll();
 
-            // For the 30 days before the last 30 days
             $last60Days = date('Y-m-d', strtotime("-60 days"));
             $data['orders_two'] = $orderModel->where('date >=', $last60Days)
                                                     ->where('date <', $last30Days)
@@ -368,16 +553,12 @@ class AdminController extends BaseController
             $data = [];
             $data['todayproducts'] = $productsAllTime;
 
-            // Use OrderModel to get orders for All Time
             $orderModel = new OrderModel();
             $data['orders_one'] = $orderModel->findAll();
 
-            // For Previous All Time (either duplicate or empty based on your requirements)
-            $data['orders_two'] = $orderModel->findAll();  // Duplicate 'all time' for 'previous all time'
+            $data['orders_two'] = $orderModel->findAll(); 
 
-            // Optionally, you can set it to an empty array if that's what you need
-            // $data['products_prevAllTime'] = [];
-            // $data['orders_prevAllTime'] = [];
+
 
             
 
@@ -421,6 +602,24 @@ class AdminController extends BaseController
         echo view('templates/admin-header', $data);
         echo view('admin-users', $data); 
     }
+
+    public function admins(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $data = [];
+
+        $userModel = new AdminModel();
+        $data['users'] = $userModel->findAll();
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        if($user['level'] > 0){
+        echo view('templates/admin-header', $data);
+        echo view('admin-admins', $data);
+        }
+    }
+
     public function orders(){
         if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
 
@@ -432,6 +631,19 @@ class AdminController extends BaseController
         $data['userlevel'] = $user['level'];
         echo view('templates/admin-header', $data);
         echo view('admin-orders', $data); 
+    }
+
+    public function coupons(){
+        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $couponModel = new CouponModel();
+        $data['coupons'] = $couponModel->findAll();
+        $model = new AdminModel();
+        $admin_ID = $_SESSION['admin_id'];
+        $user = $model->where('admin_id', $admin_ID)->first();
+        $data['userlevel'] = $user['level'];
+        echo view('templates/admin-header', $data);
+        echo view('admin-coupons', $data); 
     }
 
     public function products(){
@@ -447,34 +659,8 @@ class AdminController extends BaseController
         echo view('admin-products', $data); 
     }
 
-    public function coupons(){
-        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
 
 
-        $model = new AdminModel();
-        $admin_ID = $_SESSION['admin_id'];
-        $user = $model->where('admin_id', $admin_ID)->first();
-        $data['userlevel'] = $user['level'];
-        echo view('templates/admin-header', $data);
-        echo view('admin-coupons'); 
-    }
-
-    public function admins(){
-        if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
-
-
-        $model = new AdminModel();
-        $admin_ID = $_SESSION['admin_id'];
-        $user = $model->where('admin_id', $admin_ID)->first();
-        $data['userlevel'] = $user['level'];
-        if($user['level'] > 0){
-        echo view('templates/admin-header', $data);
-        echo view('admin-admins');
-        }else{
-            return redirect()->to('/admin');
-        }
-
-    }
 
     public function settings(){
         if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };

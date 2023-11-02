@@ -14,7 +14,7 @@
 foreach ($products as $product) {
 
 ?>
-                    <a href="/admin-order-info/<?php echo $product['product_ID']?>" style="text-decoration: none; color: black" class="admin-order--item">
+                    <a href="/admin-product-info/<?php echo $product['product_ID']?>" style="text-decoration: none; color: black" class="admin-order--item">
                         <p class="cart--productnaam"><?php echo $product['product_ID'] ?></p>
                         <p class="cart--productnaam"><?php echo $product['name'] ?></p>
                         <p class="cart--productnaam"><?php echo $product['description'] ?></p>
