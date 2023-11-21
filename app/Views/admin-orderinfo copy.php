@@ -32,13 +32,6 @@ $status;
     margin-top: 2rem !important;
   }
 
-  .product-container {
-    margin-top: 5rem !important;
-    margin: 0 auto;
-
-  
-  }
-
   .order-container p {
     margin: 10px 0;
     font-size: 18px;
@@ -79,69 +72,14 @@ $status;
   }
   ?>
 </div>
-
-
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 60%; /* Set maximum width to 60% of the screen width */
-            font-size: 1.5rem;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        td.editable {
-            position: relative;
-        }
-
-        td.editable input, td.editable select {
-            width: 100%;
-            border: none;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-
-        td.editable input:focus, td.editable select:focus {
-            outline: none;
-            border: 1px solid #007bff; /* Highlight when in edit mode */
-        }
-
-        @media (max-width: 600px) {
-            /* Adjust the table layout for smaller screens */
-            table {
-                font-size: 12px; /* Decrease font size */
-            }
-
-            th, td {
-                padding: 5px;
-            }
-
-            td.editable input, td.editable select {
-                padding: 3px;
-            }
-        }
-    </style>
-
-    <table class="product-container">
-        <tr>
-            <th>ID</th>
-            <th>Naam</th>
-            <th>Aantal</th>
-            <th>Description</th>
-        </tr>
-
-
-
-        <?php
+<div class="admin-orders">
+<div  style="background: transparent; margin: 0;" class="admin-order--item">
+<p class="cart--productnaam">ID</p>
+                        <p class="cart--productnaam">Naam</p>
+                        <p class="cart--productnaam">Aantal</p>
+                        <p class="cart--productnaam">Beschrijving</p>
+  </div>
+<?php
     $orderQuantities = array_count_values(array_column($orderproducts, 'product_ID')); 
    
     if(empty($orderQuantities)){
@@ -150,23 +88,18 @@ $status;
       foreach ($orderQuantities as $productid => $quantity) {
         $product = findProductByID($productid, $orderproducts);
 ?>
-            <tr>
-            <td><?php echo $product['product_ID']?></td>
-            <td class="editable"><input type="text" value="<?php echo $product['name']?>"></td>
-            <td class="editable"><input type="text" value="<?php echo $quantity?>"></td>
-            <td class="editable"><input type="text" value="<?php echo $product['description']?>"></td>
-        </tr>
+<div  style="text-decoration: none; color: black" class="admin-order--item">
+<p class="cart--productnaam"><?php echo $product['product_ID']?></p>
+
+                        <p class="cart--productnaam"><?php echo $product['name']?></p>
+                        <p class="cart--productnaam">Amount: <?php echo $quantity?></p>
+                        <p class="cart--productnaam"><?php echo $product['description']?></p>
+                        </div>
+
     <?php
         }
     }
     ?>
-
-
-    </table>
-</body>
-</html>
-
-
 
 </div>
 

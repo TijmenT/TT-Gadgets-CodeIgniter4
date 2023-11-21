@@ -11,7 +11,9 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",
-        "codeigniter4/codeigniter4": "dev-develop"
+        "codeigniter4/codeigniter4": "dev-develop",
+        "dompdf/dompdf": "^2.0",
+        "phpoffice/phpspreadsheet": "^1.29"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

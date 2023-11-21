@@ -34,6 +34,7 @@ class Users extends BaseController
                         $session = session();
                     
                         $session->set('user_id', $user['customer_ID']);
+                        
                         echo view('templates/header', $data);
                         echo view('renew-password', $data); 
                         echo view('templates/footer');
@@ -57,7 +58,23 @@ class Users extends BaseController
                     $session = session();
                     
                     $session->set('user_id', $user['customer_ID']);
-                    $session->setFlashdata('success', 'Login successful');
+                    //$email = \Config\Services::email();
+
+                    // Set the "From" address
+                   // $email->setFrom('terpstratuinen@ttsoftware.services', 'Tijmen');
+
+                    // Set other email parameters
+                    //$email->setTo('terpstratijmen@gmail.com');
+                    //$email->setSubject('Examplee');
+                    //$email->setMessage('Hoi');
+
+                    //if ($email->send()) {
+                    //    echo 'Email sent successfully';
+                    //} else {
+                    //    echo $email->printDebugger();
+                    //}
+                    //$session->setFlashdata('success', 'Login successful');
+                    //die();
                     return redirect()->to('/');
                 }
             }

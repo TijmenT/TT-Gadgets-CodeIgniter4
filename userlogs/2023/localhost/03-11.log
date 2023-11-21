@@ -1,0 +1,37 @@
+[2023-11-03 14:03:18] | UserAccount_ID: 1 | UserID: NULL | Action: / | 
+[2023-11-03 14:03:20] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:03:23] | UserAccount_ID: 1 | UserID: NULL | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:03:24] | UserAccount_ID: 1 | UserID: 14 | Action: / | 
+[2023-11-03 14:04:08] | UserAccount_ID: 1 | UserID: 14 | Action: / | 
+[2023-11-03 14:04:10] | UserAccount_ID: 1 | UserID: 14 | Action: /logout | 
+[2023-11-03 14:04:10] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:04:10] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:04:14] | UserAccount_ID: 1 | UserID: NULL | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:05:15] | UserAccount_ID: 1 | UserID: 14 | Action: /login | 
+[2023-11-03 14:05:57] | UserAccount_ID: 1 | UserID: 14 | Action: /login | 
+[2023-11-03 14:06:03] | UserAccount_ID: 1 | UserID: 14 | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:06:24] | UserAccount_ID: 1 | UserID: 14 | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:06:59] | UserAccount_ID: 1 | UserID: 14 | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:09:04] | UserAccount_ID: 1 | UserID: 14 | Action: /login | 
+[2023-11-03 14:09:08] | UserAccount_ID: 1 | UserID: 14 | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:09:08] | UserAccount_ID: 1 | UserID: 14 | Action: / | 
+[2023-11-03 14:11:26] | UserAccount_ID: 1 | UserID: 14 | Action: /logout | 
+[2023-11-03 14:11:26] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:11:27] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:11:32] | UserAccount_ID: 1 | UserID: NULL | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:11:33] | UserAccount_ID: 1 | UserID: 14 | Action: / | 
+[2023-11-03 14:11:51] | UserAccount_ID: 1 | UserID: 14 | Action: / | 
+[2023-11-03 14:23:36] | UserAccount_ID: 1 | UserID: 14 | Action: /logout | 
+[2023-11-03 14:23:36] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:23:37] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:23:40] | UserAccount_ID: 1 | UserID: NULL | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:23:45] | UserAccount_ID: 1 | UserID: 14 | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:29:00] | UserAccount_ID: 1 | UserID: 14 | Action: /login | 
+[2023-11-03 14:29:04] | UserAccount_ID: 1 | UserID: 14 | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:34:02] | UserAccount_ID: 1 | UserID: 14 | Action: / | 
+[2023-11-03 14:34:03] | UserAccount_ID: 1 | UserID: 14 | Action: /logout | 
+[2023-11-03 14:34:04] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:34:04] | UserAccount_ID: 1 | UserID: NULL | Action: /login | 
+[2023-11-03 14:34:07] | UserAccount_ID: 1 | UserID: NULL | Action: /login | email: test@gmail.com | password: ******** | 
+[2023-11-03 14:36:59] | UserAccount_ID: 1 | UserID: 14 | Action: /login | 
+[2023-11-03 14:37:04] | UserAccount_ID: 1 | UserID: 14 | Action: /login | email: test@gmail.com | password: ******** | 

@@ -1,4 +1,37 @@
 <?php
 
 // override core en language system validation or define your own en language validation message
-return [];
+return [
+    'required'      => 'Het veld {field} is verplicht.',
+    'min_length'    => 'Het veld {field} moet minimaal {param} karakters bevatten.',
+    'max_length'    => 'Het veld {field} mag maximaal {param} karakters bevatten.',
+    'exact_length'  => 'Het veld {field} moet precies {param} karakters bevatten.',
+    'alpha'         => 'Het veld {field} mag alleen letters bevatten.',
+    'alpha_numeric' => 'Het veld {field} mag alleen letters en cijfers bevatten.',
+    'alpha_space'   => 'Het veld {field} mag alleen letters en spaties bevatten.',
+    'alpha_dash'    => 'Het veld {field} mag alleen letters, cijfers, streepjes en underscores bevatten.',
+    'numeric'       => 'Het veld {field} moet een numerieke waarde bevatten.',
+    'integer'       => 'Het veld {field} moet een geheel getal bevatten.',
+    'decimal'       => 'Het veld {field} moet een decimaal getal bevatten.',
+    'is_natural'    => 'Het veld {field} moet een positief geheel getal bevatten.',
+    'is_natural_no_zero' => 'Het veld {field} moet een positief geheel getal groter dan nul bevatten.',
+    'valid_email'   => 'Het veld {field} moet een geldig e-mailadres bevatten.',
+    'valid_emails'  => 'De veld(en) {field} moet(en) geldige e-mailadressen bevatten.',
+    'valid_url'     => 'Het veld {field} moet een geldige URL bevatten.',
+    'valid_ip'      => 'Het veld {field} moet een geldig IP-adres bevatten.',
+    'valid_ipv4'    => 'Het veld {field} moet een geldig IPv4-adres bevatten.',
+    'valid_ipv6'    => 'Het veld {field} moet een geldig IPv6-adres bevatten.',
+    'valid_base64'  => 'Het veld {field} moet een geldige base64-string bevatten.',
+    'valid_credit_card' => 'Het veld {field} moet een geldig creditcardnummer bevatten.',
+    'is_unique'     => 'Het veld {field} moet een unieke waarde bevatten.',
+    'matches'       => 'Het veld {field} moet overeenkomen met het veld {param}.',
+    'regex_match'   => 'Het veld {field} heeft geen geldig formaat.',
+    'differs'       => 'Het veld {field} moet verschillend zijn van het veld {param}.',
+    'is_not_unique' => 'Het veld {field} moet een niet-unieke waarde bevatten.',
+    'greater_than'  => 'Het veld {field} moet een waarde groter dan {param} bevatten.',
+    'greater_than_equal_to' => 'Het veld {field} moet een waarde groter dan of gelijk aan {param} bevatten.',
+    'less_than'     => 'Het veld {field} moet een waarde kleiner dan {param} bevatten.',
+    'less_than_equal_to' => 'Het veld {field} moet een waarde kleiner dan of gelijk aan {param} bevatten.',
+    'valid_date'    => 'Het veld {field} moet een geldige datum bevatten.',
+    'valid_date_format' => 'Het veld {field} moet een geldige datum in het formaat {param} bevatten.',
+];

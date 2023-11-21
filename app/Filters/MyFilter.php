@@ -10,11 +10,13 @@ class MyFilter implements FilterInterface
 
     public function before(RequestInterface $request, $arguments = null)
     {
+       
         $session = \Config\Services::session();
         $request = service('request');
         $uri = $request->uri->getPath();
         $host = $request->uri->getHost();
         $session->set("useraccount_id", 1);
+        
         $uri = str_replace("///", "/", $uri);
         $uri = str_replace("//", "/", $uri);
 
@@ -36,7 +38,7 @@ class MyFilter implements FilterInterface
         }
 
         
-
+    return 0;
     
 
     $logdirectory = "../userlogs/".date('Y')."/".$host;

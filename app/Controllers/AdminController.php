@@ -8,7 +8,9 @@ use App\Models\OrderModel;
 use App\Models\UserModel;
 use App\Models\ProductModel;
 use App\Models\CouponModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class AdminController extends BaseController
 {
     public function index()
@@ -67,6 +69,98 @@ class AdminController extends BaseController
         return redirect()->to('/admin-dashboard');
 
     }
+
+    public function UpdateData() {
+        $productModel = new ProductModel();
+    
+        $index = 0;
+        foreach($this->request->getVar('id') as $id){
+            $newData = [
+                'name' => $this->request->getVar('name')[$index],
+                'categorie_ID' => $this->request->getVar('categorie_ID')[$index],
+                'description' => $this->request->getVar('description')[$index],
+                'price' => $this->request->getVar('amount')[$index],
+            ];
+            $productModel->update($id, $newData);
+            $index++;
+        }
+    
+        $index = 0;
+        foreach($this->request->getVar('name_1') as $name){
+
+            if (!empty($name)) {
+                $newData = [
+                    'name' => $name,
+                    'categorie_ID' => $this->request->getVar('categorie_ID_1')[$index],
+                    'description' => $this->request->getVar('description_1')[$index],
+                    'price' => $this->request->getVar('amount_1')[$index],
+                ];
+                $productModel->insert($newData);
+            }
+            $index++;
+        }
+    
+        return redirect()->to('/admin-products');
+    }
+    
+    function exportData()
+	{
+		$productModel = new ProductModel();
+    
+
+		$data = $productModel->findAll();
+
+		$file_name = 'products.xlsx';
+
+		$spreadsheet = new Spreadsheet();
+
+		$sheet = $spreadsheet->getActiveSheet();
+
+		$sheet->setCellValue('A1', 'Product ID');
+
+		$sheet->setCellValue('B1', 'Naam');
+
+		$sheet->setCellValue('C1', 'Categorie ID');
+
+		$sheet->setCellValue('D1', 'Prijs');
+
+		$count = 2;
+
+		foreach($data as $row)
+		{
+			$sheet->setCellValue('A' . $count, $row['product_ID']);
+
+			$sheet->setCellValue('B' . $count, $row['name']);
+
+			$sheet->setCellValue('C' . $count, $row['categorie_ID']);
+
+			$sheet->setCellValue('D' . $count, $row['price']);
+
+			$count++;
+		}
+
+		$writer = new Xlsx($spreadsheet);
+
+		$writer->save($file_name);
+
+		header("Content-Type: application/vnd.ms-excel");
+
+		header('Content-Disposition: attachment; filename="' . basename($file_name) . '"');
+
+		header('Expires: 0');
+
+		header('Cache-Control: must-revalidate');
+
+		header('Pragma: public');
+
+		header('Content-Length:' . filesize($file_name));
+
+		flush();
+
+		readfile($file_name);
+        
+	}
+
 
     public function GetInfoFromOrderID($order_ID)
     {
@@ -664,7 +758,11 @@ class AdminController extends BaseController
     }
 
     public function products(){
+        $db = \Config\Database::connect();
+
         if (!isset($_SESSION['admin_id'])) {         return redirect()->to('/admin-login');        };
+
+        $categories = $db->query('SELECT * FROM categories');
 
         $productModel = new ProductModel();
         $data['products'] = $productModel->findAll();
@@ -672,6 +770,7 @@ class AdminController extends BaseController
         $admin_ID = $_SESSION['admin_id'];
         $user = $model->where('admin_id', $admin_ID)->first();
         $data['userlevel'] = $user['level'];
+        $data['categories'] = $categories->getResultArray();
         echo view('templates/admin-header', $data);
         echo view('admin-products', $data); 
     }

@@ -59,9 +59,12 @@ $routes->get('/admin-product-info/(:any)', "AdminController::GetInfoFromProductI
 $routes->get('/admin-coupon-info/(:any)', "AdminController::GetInfoFromCouponID/$1");
 
 //Api / Ajax
+$routes->get('/pdf', 'PdfController::index');
+$routes->match(['get', 'post'], 'PdfController/htmlToPDF', 'PdfController::htmlToPDF');
 $routes->get('/admin-disablewebshop', 'AdminController::DisableWebshop');
 $routes->get('/admin-enablewebshop', 'AdminController::EnableWebshop');
-
+$routes->post('/save-product-changes','AdminController::UpdateData');
+$routes->get('/export-products','AdminController::ExportData');
 $routes->get('/does-order-exist/(:num)', 'AdminController::CheckOrder/$1');
 $routes->get('/does-user-exist/(:any)', 'AdminController::CheckUser/$1');
 $routes->get('/does-product-exist/(:any)', 'AdminController::CheckProduct/$1');

@@ -20,7 +20,7 @@ foreach ($orderproducts as $product) {
 
     ?>
             <div class="product--card1">
-                <img class="product--img" src="/assets/img/<?php echo $product['image']?>" />
+                <img class="product--img" src="../assets/img/<?php echo $product['image']?>" />
                 <h1 class="product--header"><?php echo $product['name']?></h1>
                 <p1 class="product--price">Amount: <?php echo $quantity?></p1>
                 <br>
