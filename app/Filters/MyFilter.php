@@ -11,7 +11,7 @@ class MyFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
        
-        $session = \Config\Services::session();
+        $session = \Config\Servces::session();
         $request = service('request');
         $uri = $request->uri->getPath();
         $host = $request->uri->getHost();
