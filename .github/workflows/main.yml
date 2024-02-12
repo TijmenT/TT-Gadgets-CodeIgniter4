@@ -23,7 +23,7 @@ jobs:
       run: composer install --no-progress
 
     - name: Run Tests
-      run: php spark serve
+      run: vendor/bin/phpunit
 
   deploy:
     needs: build-and-test
