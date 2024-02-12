@@ -7,6 +7,11 @@ use CodeIgniter\Router\RouteCollection;
 
 //Webshop
 
+//test
+
+$routes->get('/webhook', 'PrintController:index');
+
+
 //Pages
 $routes->get('/', 'Home::index');
 $routes->get('/about', 'Home::about');
