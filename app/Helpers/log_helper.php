@@ -10,7 +10,7 @@ Usage:
 function deleteOldLogs($logsDirectory, $maxDaysToKeep, $domain)
 {
     $today = new DateTime();
-    $today->setTime(0, 0, 0);
+    $today->setTim(0, 0, 0);
 
     $yearFolders = scandir($logsDirectory);
     foreach ($yearFolders as $yearFolder) {
